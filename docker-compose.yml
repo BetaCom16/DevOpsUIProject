@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   app:
-    image: ghcr.io/betacom16/devopsuiproject:latest
+    build: .
     ports:
       - "8080:8080"
     networks:
