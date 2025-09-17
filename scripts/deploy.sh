@@ -1,21 +1,21 @@
 #!/bin/bash
 
-# 1. Update system and install dependencies (Docker)
+# 1. Update system and install dependencies (Docker, AWS CLI)
 sudo apt-get update -y
-sudo apt-get install -y docker.io docker-compose python3 python3-pip
+sudo apt-get install -y docker.io docker-compose awscli python3 python3-pip
 
-# 2. Add the ubuntu user to the docker group
-sudo usermod -aG docker ubuntu
-
-# 3. Start Docker services
+# 2. Start Docker services
 sudo systemctl start docker
 sudo systemctl enable docker
 
-# 4. Install AWS CLI using pip with --break-system-packages
-sudo pip3 install awscli --break-system-packages
+# 3. Navigate to the app directory
+cd /home/ubuntu/my-app
 
-# 5. Use 'su' to run docker-compose commands as the ubuntu user
-su - ubuntu -c "cd /home/ubuntu/my-app && \
-aws ecr get-login-password --region eu-north-1 | docker login --username AWS --password-stdin 443526375408.dkr.ecr.eu-north-1.amazonaws.com && \
-docker-compose down && \
-docker-compose up -d --pull always"
+# 4. Login to ECR
+sudo aws ecr get-login-password --region eu-north-1 | sudo docker login --username AWS --password-stdin 443526375408.dkr.ecr.eu-north-1.amazonaws.com
+
+# 5. Stop and remove the old container
+sudo docker-compose down
+
+# 6. Pull the latest image and start the application in detached mode
+sudo docker-compose up -d --pull always
