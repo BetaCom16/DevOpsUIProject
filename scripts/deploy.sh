@@ -4,7 +4,7 @@
 cd /home/ubuntu/my-app
 
 # 2. Login to ECR
-aws ecr get-login-password --region --eu-north-1) 443526375408.dkr.ecr.eu-north-1.amazonaws.com/devops-app
+aws ecr get-login-password --region eu-north-1 | docker login --username AWS --password-stdin 443526375408.dkr.ecr.eu-north-1.amazonaws.com
 
 # 3. Stop and remove the old container
 docker-compose down
