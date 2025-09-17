@@ -17,6 +17,8 @@ cd /home/ubuntu/my-app
 # 5. Login to ECR
 sudo docker login -u AWS -p $(aws ecr get-login-password --region eu-north-1) 443526375408.dkr.ecr.eu-north-1.amazonaws.com/devops-app
 
-# 6. Pull the latest image and start the application
-sudo docker-compose pull
-sudo docker-compose up -d
+# 6. Stop and remove the old container to avoid migration errors
+sudo docker-compose down
+
+# 7. Pull the latest image and start the application in detached mode
+sudo docker-compose up -d --pull always
