@@ -15,7 +15,7 @@ sudo systemctl enable docker
 cd /home/ubuntu/my-app
 
 # 5. Login to ECR
-sudo docker login -u AWS -p $(aws ecr get-login-password --region <DEINE_REGION>) <DEINE_ECR_REPOSITORY_URL>
+sudo docker login -u AWS -p $(aws ecr get-login-password --region eu-north-1) 443526375408.dkr.ecr.eu-north-1.amazonaws.com/devops-app
 
 # 6. Pull the latest image and start the application
 sudo docker-compose pull
