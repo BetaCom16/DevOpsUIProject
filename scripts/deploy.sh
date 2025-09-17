@@ -18,4 +18,4 @@ sudo aws ecr get-login-password --region eu-north-1 | sudo docker login --userna
 sudo docker-compose down
 
 # 6. Pull the latest image and start the application in detached mode
-sudo docker-compose up -d --pull always
+sudo docker-compose up -d --force-recreate
